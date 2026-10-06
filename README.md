@@ -527,7 +527,7 @@ Possible future improvements include:
 ## 👨‍💻 Author
 
 **Siddharth Ghawate**
-College Ontology AI Agent — B.Tech Project
+College Ontology AI Agent - B.Tech Project
 
 ---
 
