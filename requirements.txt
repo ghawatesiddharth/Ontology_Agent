@@ -1,0 +1,6 @@
+rdflib==7.6.0
+owlrl==7.6.2
+fastapi==0.142.2
+uvicorn==0.53.0
+pydantic
+requests

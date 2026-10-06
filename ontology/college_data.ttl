@@ -1,0 +1,277 @@
+@prefix : <http://example.org/college#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# =========================================================
+# COLLEGE
+# =========================================================
+
+:SanjivaniCollegeOfEngineering
+    rdf:type :College ;
+    :hasName "Sanjivani College of Engineering" ;
+    :hasDepartment :InformationTechnology ;
+    :hasDepartment :ComputerEngineering ;
+    :hasDepartment :ArtificialIntelligenceDataScience ;
+    :hasDepartment :MechanicalEngineering ;
+    :hasDepartment :ElectronicsTelecommunication .
+
+
+# =========================================================
+# DEPARTMENTS
+# =========================================================
+
+:InformationTechnology
+    rdf:type :Department ;
+    :hasName "Information Technology" ;
+    :hasFaculty :ProfRajendra ;
+    :hasFaculty :ProfAnita ;
+    :hasStudent :Student53 ;
+    :hasStudent :Student54 ;
+    :hasStudent :Student55 ;
+    :hasStudent :Student56 ;
+    :offersCourse :BTechInformationTechnology ;
+    :offersSubject :ArtificialIntelligence ;
+    :offersSubject :MachineLearning ;
+    :offersSubject :DatabaseManagementSystems ;
+    :offersSubject :DataStructures ;
+    :offersSubject :ComputerNetworks ;
+    :offersSubject :OperatingSystems ;
+    :offersSubject :JavaProgramming ;
+    :offersSubject :WebTechnology .
+
+
+:ComputerEngineering
+    rdf:type :Department ;
+    :hasName "Computer Engineering" ;
+    :hasFaculty :ProfAmit ;
+    :offersSubject :DataStructures ;
+    :offersSubject :DatabaseManagementSystems ;
+    :offersSubject :OperatingSystems .
+
+
+:ArtificialIntelligenceDataScience
+    rdf:type :Department ;
+    :hasName "Artificial Intelligence and Data Science" ;
+    :hasFaculty :ProfNeha ;
+    :offersSubject :MachineLearning ;
+    :offersSubject :ArtificialIntelligence .
+
+
+:MechanicalEngineering
+    rdf:type :Department ;
+    :hasName "Mechanical Engineering" .
+
+
+:ElectronicsTelecommunication
+    rdf:type :Department ;
+    :hasName "Electronics and Telecommunication Engineering" .
+
+
+# =========================================================
+# COURSE
+# =========================================================
+
+:BTechInformationTechnology
+    rdf:type :Course ;
+    :hasName "B.Tech Information Technology" ;
+    :containsSubject :DataStructures ;
+    :containsSubject :DatabaseManagementSystems ;
+    :containsSubject :ComputerNetworks ;
+    :containsSubject :OperatingSystems ;
+    :containsSubject :ArtificialIntelligence ;
+    :containsSubject :MachineLearning ;
+    :containsSubject :JavaProgramming ;
+    :containsSubject :WebTechnology .
+
+
+# =========================================================
+# FACULTY
+# =========================================================
+
+:ProfRajendra
+    rdf:type :Faculty ;
+    :hasName "Prof. Rajendra Kankrale" ;
+    :hasEmail "rajendra.kankrale@example.edu" ;
+    :belongsToDepartment :InformationTechnology ;
+    :teaches :ArtificialIntelligence ;
+    :teaches :DatabaseManagementSystems .
+
+
+:ProfAnita
+    rdf:type :Faculty ;
+    :hasName "Prof. Anita Sharma" ;
+    :hasEmail "anita.sharma@example.edu" ;
+    :belongsToDepartment :InformationTechnology ;
+    :teaches :MachineLearning ;
+    :teaches :DataStructures .
+
+
+:ProfAmit
+    rdf:type :Faculty ;
+    :hasName "Prof. Amit Patil" ;
+    :hasEmail "amit.patil@example.edu" ;
+    :belongsToDepartment :ComputerEngineering ;
+    :teaches :OperatingSystems ;
+    :teaches :ComputerNetworks .
+
+
+:ProfNeha
+    rdf:type :Faculty ;
+    :hasName "Prof. Neha Joshi" ;
+    :hasEmail "neha.joshi@example.edu" ;
+    :belongsToDepartment :ArtificialIntelligenceDataScience ;
+    :teaches :MachineLearning ;
+    :teaches :ArtificialIntelligence .
+
+
+# =========================================================
+# STUDENTS
+# =========================================================
+
+:Student53
+    rdf:type :Student ;
+    :hasName "Student 53" ;
+    :hasRollNumber "53" ;
+    :belongsToDepartment :InformationTechnology ;
+    :enrolledIn :BTechInformationTechnology .
+
+
+:Student54
+    rdf:type :Student ;
+    :hasName "Student 54" ;
+    :hasRollNumber "54" ;
+    :belongsToDepartment :InformationTechnology ;
+    :enrolledIn :BTechInformationTechnology .
+
+
+:Student55
+    rdf:type :Student ;
+    :hasName "Student 55" ;
+    :hasRollNumber "55" ;
+    :belongsToDepartment :InformationTechnology ;
+    :enrolledIn :BTechInformationTechnology .
+
+
+:Student56
+    rdf:type :Student ;
+    :hasName "Student 56" ;
+    :hasRollNumber "56" ;
+    :belongsToDepartment :InformationTechnology ;
+    :enrolledIn :BTechInformationTechnology .
+
+
+# =========================================================
+# SUBJECTS
+# =========================================================
+
+:ArtificialIntelligence
+    rdf:type :Subject ;
+    :hasName "Artificial Intelligence" ;
+    :hasCredits 4 ;
+    :hasPrerequisite :DataStructures .
+
+
+:MachineLearning
+    rdf:type :Subject ;
+    :hasName "Machine Learning" ;
+    :hasCredits 4 ;
+    :hasPrerequisite :ArtificialIntelligence .
+
+
+:DatabaseManagementSystems
+    rdf:type :Subject ;
+    :hasName "Database Management Systems" ;
+    :hasCredits 4 ;
+    :hasPrerequisite :DataStructures .
+
+
+:DataStructures
+    rdf:type :Subject ;
+    :hasName "Data Structures" ;
+    :hasCredits 4 .
+
+
+:ComputerNetworks
+    rdf:type :Subject ;
+    :hasName "Computer Networks" ;
+    :hasCredits 4 ;
+    :hasPrerequisite :DataStructures .
+
+
+:OperatingSystems
+    rdf:type :Subject ;
+    :hasName "Operating Systems" ;
+    :hasCredits 4 ;
+    :hasPrerequisite :DataStructures .
+
+
+:JavaProgramming
+    rdf:type :Subject ;
+    :hasName "Java Programming" ;
+    :hasCredits 4 .
+
+
+:WebTechnology
+    rdf:type :Subject ;
+    :hasName "Web Technology" ;
+    :hasCredits 4 ;
+    :hasPrerequisite :JavaProgramming .
+
+
+# =========================================================
+# SEMESTERS
+# =========================================================
+
+:Semester7
+    rdf:type :Semester ;
+    :hasName "Semester 7" ;
+    :hasSemesterNumber 7 .
+
+
+# =========================================================
+# CLASSROOMS
+# =========================================================
+
+:Room101
+    rdf:type :Classroom ;
+    :hasName "IT Classroom 101" ;
+    :hasRoomNumber "101" .
+
+
+:Room102
+    rdf:type :Classroom ;
+    :hasName "IT Classroom 102" ;
+    :hasRoomNumber "102" .
+
+
+# =========================================================
+# LABORATORIES
+# =========================================================
+
+:AILab
+    rdf:type :Laboratory ;
+    :hasName "Artificial Intelligence Laboratory" .
+
+
+:ProgrammingLab
+    rdf:type :Laboratory ;
+    :hasName "Programming Laboratory" .
+
+
+# =========================================================
+# SUBJECT LOCATIONS
+# =========================================================
+
+:ArtificialIntelligence
+    :offeredInSemester :Semester7 ;
+    :usesClassroom :Room101 ;
+    :usesLaboratory :AILab .
+
+
+:MachineLearning
+    :offeredInSemester :Semester7 ;
+    :usesClassroom :Room102 ;
+    :usesLaboratory :AILab .
+
+
+:JavaProgramming
+    :usesLaboratory :ProgrammingLab .

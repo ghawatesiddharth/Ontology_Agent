@@ -1,0 +1,214 @@
+@prefix : <http://example.org/college#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# =========================================================
+# College Ontology
+# =========================================================
+
+:CollegeOntology rdf:type owl:Ontology ;
+    rdfs:label "College Ontology" ;
+    rdfs:comment "Ontology representing knowledge about a college, its departments, people, courses and academic activities." .
+
+
+# =========================================================
+# CLASSES
+# =========================================================
+
+:College rdf:type owl:Class ;
+    rdfs:label "College" ;
+    rdfs:comment "An educational institution." .
+
+
+:Department rdf:type owl:Class ;
+    rdfs:label "Department" ;
+    rdfs:comment "An academic department within the college." .
+
+
+:Faculty rdf:type owl:Class ;
+    rdfs:label "Faculty" ;
+    rdfs:comment "A teaching or academic staff member." .
+
+
+:Student rdf:type owl:Class ;
+    rdfs:label "Student" ;
+    rdfs:comment "A student enrolled in the college." .
+
+
+:Course rdf:type owl:Class ;
+    rdfs:label "Course" ;
+    rdfs:comment "An academic program or course offered by the college." .
+
+
+:Subject rdf:type owl:Class ;
+    rdfs:label "Subject" ;
+    rdfs:comment "An academic subject taught as part of a course." .
+
+
+:Classroom rdf:type owl:Class ;
+    rdfs:label "Classroom" ;
+    rdfs:comment "A room used for academic teaching." .
+
+
+:Laboratory rdf:type owl:Class ;
+    rdfs:label "Laboratory" ;
+    rdfs:comment "A laboratory used for practical or technical activities." .
+
+
+:Semester rdf:type owl:Class ;
+    rdfs:label "Semester" ;
+    rdfs:comment "An academic semester." .
+
+
+:Event rdf:type owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "An academic or college event." .
+
+
+:Examination rdf:type owl:Class ;
+    rdfs:label "Examination" ;
+    rdfs:comment "An academic examination." .
+
+
+:Club rdf:type owl:Class ;
+    rdfs:label "Club" ;
+    rdfs:comment "A student or academic club." .
+
+
+# =========================================================
+# OBJECT PROPERTIES
+# =========================================================
+
+:hasDepartment rdf:type owl:ObjectProperty ;
+    rdfs:domain :College ;
+    rdfs:range :Department ;
+    rdfs:label "has department" .
+
+
+:belongsToDepartment rdf:type owl:ObjectProperty ;
+    rdfs:domain owl:Thing ;
+    rdfs:range :Department ;
+    rdfs:label "belongs to department" .
+
+
+:hasFaculty rdf:type owl:ObjectProperty ;
+    rdfs:domain :Department ;
+    rdfs:range :Faculty ;
+    rdfs:label "has faculty" .
+
+
+:hasStudent rdf:type owl:ObjectProperty ;
+    rdfs:domain :Department ;
+    rdfs:range :Student ;
+    rdfs:label "has student" .
+
+
+:offersCourse rdf:type owl:ObjectProperty ;
+    rdfs:domain :Department ;
+    rdfs:range :Course ;
+    rdfs:label "offers course" .
+
+
+:offersSubject rdf:type owl:ObjectProperty ;
+    rdfs:domain :Department ;
+    rdfs:range :Subject ;
+    rdfs:label "offers subject" .
+
+
+:teaches rdf:type owl:ObjectProperty ;
+    rdfs:domain :Faculty ;
+    rdfs:range :Subject ;
+    rdfs:label "teaches" .
+
+
+:enrolledIn rdf:type owl:ObjectProperty ;
+    rdfs:domain :Student ;
+    rdfs:range :Course ;
+    rdfs:label "enrolled in" .
+
+
+:containsSubject rdf:type owl:ObjectProperty ;
+    rdfs:domain :Course ;
+    rdfs:range :Subject ;
+    rdfs:label "contains subject" .
+
+
+:hasPrerequisite rdf:type owl:ObjectProperty ;
+    rdfs:domain :Subject ;
+    rdfs:range :Subject ;
+    rdfs:label "has prerequisite" .
+
+
+:usesClassroom rdf:type owl:ObjectProperty ;
+    rdfs:domain :Subject ;
+    rdfs:range :Classroom ;
+    rdfs:label "uses classroom" .
+
+
+:usesLaboratory rdf:type owl:ObjectProperty ;
+    rdfs:domain :Subject ;
+    rdfs:range :Laboratory ;
+    rdfs:label "uses laboratory" .
+
+
+:offeredInSemester rdf:type owl:ObjectProperty ;
+    rdfs:domain :Subject ;
+    rdfs:range :Semester ;
+    rdfs:label "offered in semester" .
+
+
+:conductsEvent rdf:type owl:ObjectProperty ;
+    rdfs:domain :Department ;
+    rdfs:range :Event ;
+    rdfs:label "conducts event" .
+
+
+:hasExamination rdf:type owl:ObjectProperty ;
+    rdfs:domain :Subject ;
+    rdfs:range :Examination ;
+    rdfs:label "has examination" .
+
+
+:memberOfClub rdf:type owl:ObjectProperty ;
+    rdfs:domain :Student ;
+    rdfs:range :Club ;
+    rdfs:label "member of club" .
+
+
+# =========================================================
+# DATA PROPERTIES
+# =========================================================
+
+:hasName rdf:type owl:DatatypeProperty ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "has name" .
+
+
+:hasEmail rdf:type owl:DatatypeProperty ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "has email" .
+
+
+:hasRollNumber rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Student ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "has roll number" .
+
+
+:hasRoomNumber rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Classroom ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "has room number" .
+
+
+:hasCredits rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Subject ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "has credits" .
+
+
+:hasSemesterNumber rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Semester ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "has semester number" .
