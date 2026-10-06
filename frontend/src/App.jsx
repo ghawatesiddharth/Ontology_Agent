@@ -22,7 +22,8 @@ import {
 } from "lucide-react";
 import "./App.css";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 const suggestions = [
   "Which branches does the college offer?",
@@ -48,7 +49,6 @@ function App() {
   const [backendOnline, setBackendOnline] = useState(false);
 
   const [dashboardOpen, setDashboardOpen] = useState(false);
-
   const [stats, setStats] = useState(null);
   const [statsLoading, setStatsLoading] = useState(false);
   const [statsError, setStatsError] = useState("");
@@ -60,7 +60,6 @@ function App() {
   const [reasoning, setReasoning] = useState(null);
   const [reasoningLoading, setReasoningLoading] = useState(false);
   const [reasoningError, setReasoningError] = useState("");
-
   const [graphSearch, setGraphSearch] = useState("");
   const [selectedNode, setSelectedNode] = useState(null);
 
@@ -177,7 +176,9 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error("The backend could not process the question.");
+        throw new Error(
+          "The backend could not process the question."
+        );
       }
 
       const data = await response.json();
@@ -199,7 +200,7 @@ function App() {
         {
           role: "assistant",
           content:
-            "I could not connect to the backend. Please make sure FastAPI is running on port 8000.",
+            "I could not connect to the backend. Please make sure the API is running.",
           type: "error",
         },
       ]);
@@ -282,7 +283,9 @@ function App() {
             }`}
           />
 
-          {backendOnline ? "Backend connected" : "Backend offline"}
+          {backendOnline
+            ? "Backend connected"
+            : "Backend offline"}
         </div>
 
         <nav className="sidebar-nav">
@@ -291,12 +294,18 @@ function App() {
             <span>AI Assistant</span>
           </button>
 
-          <button className="nav-item" onClick={openDashboard}>
+          <button
+            className="nav-item"
+            onClick={openDashboard}
+          >
             <Network size={18} />
             <span>Knowledge Graph</span>
           </button>
 
-          <button className="nav-item" onClick={openDashboard}>
+          <button
+            className="nav-item"
+            onClick={openDashboard}
+          >
             <Zap size={18} />
             <span>OWL-RL Reasoning</span>
           </button>
@@ -305,13 +314,17 @@ function App() {
         <div className="sidebar-bottom">
           <div className="sidebar-project">
             <Sparkles size={17} />
+
             <div>
               <strong>Ontology Project</strong>
               <span>RDF + SPARQL + OWL-RL</span>
             </div>
           </div>
 
-          <button className="clear-button" onClick={clearChat}>
+          <button
+            className="clear-button"
+            onClick={clearChat}
+          >
             <RefreshCw size={16} />
             Clear conversation
           </button>
@@ -321,7 +334,10 @@ function App() {
       <main className="main-content">
         <header className="topbar">
           <div>
-            <p className="eyebrow">COLLEGE KNOWLEDGE SYSTEM</p>
+            <p className="eyebrow">
+              COLLEGE KNOWLEDGE SYSTEM
+            </p>
+
             <h2>College Ontology AI Assistant</h2>
           </div>
 
@@ -332,10 +348,14 @@ function App() {
                   backendOnline ? "online" : "offline"
                 }`}
               />
+
               {backendOnline ? "Online" : "Offline"}
             </div>
 
-            <button className="dashboard-button" onClick={openDashboard}>
+            <button
+              className="dashboard-button"
+              onClick={openDashboard}
+            >
               <Network size={17} />
               Explore Knowledge Graph
             </button>
@@ -351,7 +371,9 @@ function App() {
 
               <div>
                 <h3>Ontology Assistant</h3>
-                <p>Ask questions using natural language</p>
+                <p>
+                  Ask questions using natural language
+                </p>
               </div>
             </div>
 
@@ -382,7 +404,6 @@ function App() {
                   }`}
                 >
                   <p>{message.content}</p>
-
                 </div>
               </div>
             ))}
@@ -394,7 +415,10 @@ function App() {
                 </div>
 
                 <div className="message-bubble assistant-bubble loading-bubble">
-                  <LoaderCircle className="spin" size={18} />
+                  <LoaderCircle
+                    className="spin"
+                    size={18}
+                  />
                   <span>Querying ontology...</span>
                 </div>
               </div>
@@ -412,7 +436,9 @@ function App() {
                 <button
                   key={suggestion}
                   className="suggestion-chip"
-                  onClick={() => askQuestion(suggestion)}
+                  onClick={() =>
+                    askQuestion(suggestion)
+                  }
                 >
                   {suggestion}
                 </button>
@@ -420,14 +446,19 @@ function App() {
             </div>
           </div>
 
-          <form className="chat-input-area" onSubmit={handleSubmit}>
+          <form
+            className="chat-input-area"
+            onSubmit={handleSubmit}
+          >
             <div className="input-wrapper">
               <MessageSquare size={19} />
 
               <input
                 type="text"
                 value={input}
-                onChange={(event) => setInput(event.target.value)}
+                onChange={(event) =>
+                  setInput(event.target.value)
+                }
                 placeholder="Ask something about the college..."
                 disabled={loading}
               />
@@ -435,7 +466,9 @@ function App() {
               <button
                 type="submit"
                 className="send-button"
-                disabled={loading || !input.trim()}
+                disabled={
+                  loading || !input.trim()
+                }
                 aria-label="Send question"
               >
                 <Send size={18} />
@@ -452,20 +485,29 @@ function App() {
         >
           <div
             className="dashboard-modal"
-            onClick={(event) => event.stopPropagation()}
+            onClick={(event) =>
+              event.stopPropagation()
+            }
           >
             <div className="dashboard-header">
               <div>
-                <p className="eyebrow">SEMANTIC KNOWLEDGE SYSTEM</p>
+                <p className="eyebrow">
+                  SEMANTIC KNOWLEDGE SYSTEM
+                </p>
+
                 <h2>Knowledge Graph Dashboard</h2>
+
                 <p>
-                  Explore RDF entities, relationships and OWL-RL reasoning.
+                  Explore RDF entities, relationships and
+                  OWL-RL reasoning.
                 </p>
               </div>
 
               <button
                 className="close-dashboard"
-                onClick={() => setDashboardOpen(false)}
+                onClick={() =>
+                  setDashboardOpen(false)
+                }
               >
                 <X size={20} />
               </button>
@@ -476,7 +518,11 @@ function App() {
                 <div className="section-heading">
                   <div>
                     <h3>Ontology Statistics</h3>
-                    <p>Live information from the FastAPI backend.</p>
+
+                    <p>
+                      Live information from the FastAPI
+                      backend.
+                    </p>
                   </div>
 
                   <button
@@ -489,7 +535,8 @@ function App() {
                     <RefreshCw
                       size={15}
                       className={
-                        statsLoading || reasoningLoading
+                        statsLoading ||
+                        reasoningLoading
                           ? "spin"
                           : ""
                       }
@@ -499,7 +546,9 @@ function App() {
                 </div>
 
                 {statsError && (
-                  <div className="error-card">{statsError}</div>
+                  <div className="error-card">
+                    {statsError}
+                  </div>
                 )}
 
                 <div className="stats-grid">
@@ -510,8 +559,12 @@ function App() {
 
                     <div>
                       <span>RDF Triples</span>
+
                       <strong>
-                        {statsLoading ? "..." : stats?.knowledge_graph?.triples ?? "—"}
+                        {statsLoading
+                          ? "..."
+                          : stats?.knowledge_graph
+                              ?.triples ?? "—"}
                       </strong>
                     </div>
                   </div>
@@ -523,10 +576,12 @@ function App() {
 
                     <div>
                       <span>Reasoned Triples</span>
+
                       <strong>
                         {statsLoading
                           ? "..."
-                          : stats?.knowledge_graph?.reasoned_triples ?? "—"}
+                          : stats?.knowledge_graph
+                              ?.reasoned_triples ?? "—"}
                       </strong>
                     </div>
                   </div>
@@ -538,10 +593,12 @@ function App() {
 
                     <div>
                       <span>Inferred Triples</span>
+
                       <strong>
                         {statsLoading
                           ? "..."
-                          : stats?.knowledge_graph?.inferred_triples ?? "—"}
+                          : stats?.knowledge_graph
+                              ?.inferred_triples ?? "—"}
                       </strong>
                     </div>
                   </div>
@@ -552,8 +609,10 @@ function App() {
                 <div className="section-heading">
                   <div>
                     <h3>Knowledge Base Entities</h3>
+
                     <p>
-                      Main entities currently represented in the ontology.
+                      Main entities currently represented
+                      in the ontology.
                     </p>
                   </div>
                 </div>
@@ -561,50 +620,65 @@ function App() {
                 <div className="entity-grid">
                   <div className="entity-card">
                     <Building2 size={20} />
+
                     <div>
                       <span>Departments</span>
+
                       <strong>
-                        {stats?.entities?.departments ?? "—"}
+                        {stats?.entities
+                          ?.departments ?? "—"}
                       </strong>
                     </div>
                   </div>
 
                   <div className="entity-card">
                     <BookOpen size={20} />
+
                     <div>
                       <span>Subjects</span>
+
                       <strong>
-                        {stats?.entities?.subjects ?? "—"}
+                        {stats?.entities?.subjects ??
+                          "—"}
                       </strong>
                     </div>
                   </div>
 
                   <div className="entity-card">
                     <Users size={20} />
+
                     <div>
                       <span>Faculty</span>
+
                       <strong>
-                        {stats?.entities?.faculty ?? "—"}
+                        {stats?.entities?.faculty ??
+                          "—"}
                       </strong>
                     </div>
                   </div>
 
                   <div className="entity-card">
                     <GraduationCap size={20} />
+
                     <div>
                       <span>Students</span>
+
                       <strong>
-                        {stats?.entities?.students ?? "—"}
+                        {stats?.entities?.students ??
+                          "—"}
                       </strong>
                     </div>
                   </div>
 
                   <div className="entity-card">
                     <BookOpen size={20} />
+
                     <div>
                       <span>Courses</span>
+
                       <strong>
-                        {stats?.entities?.courses ?? "—"}
+                        {stats?.entities?.courses ??
+                          "—"}
                       </strong>
                     </div>
                   </div>
@@ -620,23 +694,29 @@ function App() {
                     </div>
 
                     <p>
-                      Visualize how semantic reasoning expands the knowledge
-                      graph.
+                      Visualize how semantic reasoning
+                      expands the knowledge graph.
                     </p>
                   </div>
 
                   <span className="engine-badge">
-                    {reasoning?.reasoning_engine || "OWL-RL"}
+                    {reasoning?.reasoning_engine ||
+                      "OWL-RL"}
                   </span>
                 </div>
 
                 {reasoningError && (
-                  <div className="error-card">{reasoningError}</div>
+                  <div className="error-card">
+                    {reasoningError}
+                  </div>
                 )}
 
                 {reasoningLoading && !reasoning ? (
                   <div className="reasoning-loading">
-                    <LoaderCircle className="spin" size={22} />
+                    <LoaderCircle
+                      className="spin"
+                      size={22}
+                    />
                     Loading reasoning results...
                   </div>
                 ) : (
@@ -644,9 +724,12 @@ function App() {
                     <div className="reasoning-flow">
                       <div className="reasoning-box">
                         <span>Original RDF</span>
+
                         <strong>
-                          {reasoningStats?.before ?? "—"}
+                          {reasoningStats?.before ??
+                            "—"}
                         </strong>
+
                         <small>triples</small>
                       </div>
 
@@ -657,9 +740,12 @@ function App() {
 
                       <div className="reasoning-box">
                         <span>Reasoned Graph</span>
+
                         <strong>
-                          {reasoningStats?.after ?? "—"}
+                          {reasoningStats?.after ??
+                            "—"}
                         </strong>
+
                         <small>triples</small>
                       </div>
 
@@ -668,10 +754,16 @@ function App() {
                       </div>
 
                       <div className="reasoning-box inferred">
-                        <span>Additional Triples</span>
+                        <span>
+                          Additional Triples
+                        </span>
+
                         <strong>
-                          +{reasoningStats?.inferred ?? "—"}
+                          +
+                          {reasoningStats?.inferred ??
+                            "—"}
                         </strong>
+
                         <small>inferred</small>
                       </div>
                     </div>
@@ -682,17 +774,23 @@ function App() {
                       </div>
 
                       <div>
-                        <h4>What is happening here?</h4>
+                        <h4>
+                          What is happening here?
+                        </h4>
 
                         <p>
-                          The original ontology and college data contain{" "}
+                          The original ontology and
+                          college data contain{" "}
                           <strong>
-                            {reasoningStats?.before ?? 268}
+                            {reasoningStats?.before ??
+                              268}
                           </strong>{" "}
-                          RDF triples. OWL-RL reasoning applies semantic
-                          rules to that graph and expands it to{" "}
+                          RDF triples. OWL-RL reasoning
+                          applies semantic rules to that
+                          graph and expands it to{" "}
                           <strong>
-                            {reasoningStats?.after ?? 731}
+                            {reasoningStats?.after ??
+                              731}
                           </strong>{" "}
                           triples.
                         </p>
@@ -700,22 +798,30 @@ function App() {
                         <p>
                           That means the reasoner produced{" "}
                           <strong>
-                            {reasoningStats?.inferred ?? 463}
+                            {reasoningStats?.inferred ??
+                              463}
                           </strong>{" "}
-                          additional semantic facts. These inferred facts
-                          allow the system to understand relationships and
-                          types that are logically derivable from the ontology.
+                          additional semantic facts.
+                          These inferred facts allow the
+                          system to understand
+                          relationships and types that are
+                          logically derivable from the
+                          ontology.
                         </p>
                       </div>
                     </div>
 
                     <div className="reasoning-note">
-                      <strong>Important for your viva:</strong>
+                      <strong>
+                        Important for your viva:
+                      </strong>
+
                       <span>
-                        The +463 figure is the difference between the graph
-                        size before and after OWL-RL expansion. It should not
-                        automatically be described as 463 new college
-                        relationships.
+                        The +463 figure is the difference
+                        between the graph size before and
+                        after OWL-RL expansion. It should
+                        not automatically be described as
+                        463 new college relationships.
                       </span>
                     </div>
                   </>
@@ -725,9 +831,13 @@ function App() {
               <section className="dashboard-section">
                 <div className="section-heading">
                   <div>
-                    <h3>RDF Relationship Explorer</h3>
+                    <h3>
+                      RDF Relationship Explorer
+                    </h3>
+
                     <p>
-                      Select an entity to inspect its graph relationships.
+                      Select an entity to inspect its graph
+                      relationships.
                     </p>
                   </div>
 
@@ -737,14 +847,18 @@ function App() {
                   >
                     <RefreshCw
                       size={15}
-                      className={graphLoading ? "spin" : ""}
+                      className={
+                        graphLoading ? "spin" : ""
+                      }
                     />
                     Reload graph
                   </button>
                 </div>
 
                 {graphError && (
-                  <div className="error-card">{graphError}</div>
+                  <div className="error-card">
+                    {graphError}
+                  </div>
                 )}
 
                 <div className="graph-toolbar">
@@ -755,7 +869,9 @@ function App() {
                       type="text"
                       value={graphSearch}
                       onChange={(event) =>
-                        setGraphSearch(event.target.value)
+                        setGraphSearch(
+                          event.target.value
+                        )
                       }
                       placeholder="Search entities..."
                     />
@@ -770,7 +886,10 @@ function App() {
                   <div className="graph-node-list">
                     {graphLoading ? (
                       <div className="graph-loading">
-                        <LoaderCircle className="spin" size={22} />
+                        <LoaderCircle
+                          className="spin"
+                          size={22}
+                        />
                         Loading graph...
                       </div>
                     ) : filteredNodes.length === 0 ? (
@@ -786,15 +905,22 @@ function App() {
                               ? "selected"
                               : ""
                           }`}
-                          onClick={() => setSelectedNode(node)}
+                          onClick={() =>
+                            setSelectedNode(node)
+                          }
                         >
                           <div className="graph-node-icon">
                             <Network size={16} />
                           </div>
 
                           <div>
-                            <strong>{node.label}</strong>
-                            <span>{node.type || "Entity"}</span>
+                            <strong>
+                              {node.label}
+                            </strong>
+
+                            <span>
+                              {node.type || "Entity"}
+                            </span>
                           </div>
 
                           <ChevronRight size={16} />
@@ -812,73 +938,100 @@ function App() {
                           </div>
 
                           <div>
-                            <span>Selected entity</span>
-                            <h4>{selectedNode.label}</h4>
+                            <span>
+                              Selected entity
+                            </span>
+
+                            <h4>
+                              {selectedNode.label}
+                            </h4>
                           </div>
                         </div>
 
                         <div className="selected-node-meta">
                           <div>
                             <span>Type</span>
+
                             <strong>
-                              {selectedNode.type || "Entity"}
+                              {selectedNode.type ||
+                                "Entity"}
                             </strong>
                           </div>
 
                           <div>
-                            <span>Relationships</span>
-                            <strong>{selectedEdges.length}</strong>
+                            <span>
+                              Relationships
+                            </span>
+
+                            <strong>
+                              {selectedEdges.length}
+                            </strong>
                           </div>
                         </div>
 
                         <div className="relationship-list">
-                          <h4>RDF Relationships</h4>
+                          <h4>
+                            RDF Relationships
+                          </h4>
 
-                          {selectedEdges.length === 0 ? (
+                          {selectedEdges.length ===
+                          0 ? (
                             <p className="muted-text">
                               No relationships found.
                             </p>
                           ) : (
-                            selectedEdges.map((edge, index) => {
-                              const isSource =
-                                edge.source === selectedNode.id;
+                            selectedEdges.map(
+                              (edge, index) => {
+                                const isSource =
+                                  edge.source ===
+                                  selectedNode.id;
 
-                              return (
-                                <div
-                                  className="relationship-item"
-                                  key={`${edge.source}-${edge.target}-${index}`}
-                                >
-                                  <span>
-                                    {isSource
-                                      ? selectedNode.label
-                                      : edge.source_label}
-                                  </span>
+                                return (
+                                  <div
+                                    className="relationship-item"
+                                    key={`${edge.source}-${edge.target}-${index}`}
+                                  >
+                                    <span>
+                                      {isSource
+                                        ? selectedNode.label
+                                        : edge.source_label}
+                                    </span>
 
-                                  <div className="relationship-predicate">
-                                    <ArrowRight size={14} />
-                                    <strong>
-                                      {edge.predicate_label}
-                                    </strong>
+                                    <div className="relationship-predicate">
+                                      <ArrowRight
+                                        size={14}
+                                      />
+
+                                      <strong>
+                                        {
+                                          edge.predicate_label
+                                        }
+                                      </strong>
+                                    </div>
+
+                                    <span>
+                                      {isSource
+                                        ? edge.target_label
+                                        : selectedNode.label}
+                                    </span>
                                   </div>
-
-                                  <span>
-                                    {isSource
-                                      ? edge.target_label
-                                      : selectedNode.label}
-                                  </span>
-                                </div>
-                              );
-                            })
+                                );
+                              }
+                            )
                           )}
                         </div>
                       </>
                     ) : (
                       <div className="graph-placeholder">
                         <Network size={42} />
-                        <h4>Select an entity</h4>
+
+                        <h4>
+                          Select an entity
+                        </h4>
+
                         <p>
-                          Choose an entity from the list to explore its RDF
-                          relationships.
+                          Choose an entity from the list to
+                          explore its RDF relationships.
                         </p>
                       </div>
                     )}
@@ -889,9 +1042,13 @@ function App() {
               <section className="dashboard-section semantic-section">
                 <div className="section-heading">
                   <div>
-                    <h3>Semantic Relationship Map</h3>
+                    <h3>
+                      Semantic Relationship Map
+                    </h3>
+
                     <p>
-                      High-level view of how ontology entities connect.
+                      High-level view of how ontology
+                      entities connect.
                     </p>
                   </div>
                 </div>
@@ -899,7 +1056,9 @@ function App() {
                 <div className="semantic-map">
                   <div className="semantic-center">
                     <Brain size={25} />
-                    <span>College Ontology</span>
+                    <span>
+                      College Ontology
+                    </span>
                   </div>
 
                   <div className="semantic-node node-department">
@@ -936,4 +1095,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
